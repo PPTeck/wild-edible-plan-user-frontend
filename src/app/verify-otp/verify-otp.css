@@ -113,3 +113,105 @@
   transition: color 0.15s;
 }
 .btn-back:hover { color: #374151; }
+
+/* ── Active Session Popup ──────────────────────────────── */
+.session-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 20px;
+}
+
+.session-popup {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+  animation: popup-in 0.22s ease;
+}
+
+@keyframes popup-in {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.session-popup-icon {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+
+.session-popup-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a2535;
+}
+
+.session-popup-msg {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.session-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-popup-ok {
+  padding: 13px;
+  background: #14532d;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(20, 83, 45, 0.25);
+}
+.btn-popup-ok:hover:not(:disabled) { background: #166534; transform: translateY(-1px); }
+.btn-popup-ok:disabled { opacity: 0.48; cursor: not-allowed; }
+
+.btn-popup-cancel {
+  padding: 12px;
+  background: #fff;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.18s;
+}
+.btn-popup-cancel:hover:not(:disabled) { background: #f9fafb; }
+.btn-popup-cancel:disabled { opacity: 0.48; cursor: not-allowed; }
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

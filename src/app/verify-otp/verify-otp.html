@@ -46,3 +46,51 @@
     </div>
   </div>
 </div>
+
+
+<!-- ============================================================ -->
+<!-- ACTIVE SESSION POPUP                                         -->
+<!-- Shown when the same user is already logged in elsewhere      -->
+<!-- ============================================================ -->
+
+<div class="session-backdrop" *ngIf="showActiveSessionPopup">
+  <div class="session-popup">
+
+    <!-- Icon -->
+    <div class="session-popup-icon">⚠️</div>
+
+    <!-- Title -->
+    <h3 class="session-popup-title">Already Logged In</h3>
+
+    <!-- Message -->
+    <p class="session-popup-msg">
+      Your account is currently active on another device or browser.<br/>
+      Click <strong>OK</strong> to log out from that device and continue here.
+    </p>
+
+    <!-- Buttons -->
+    <div class="session-popup-actions">
+
+      <!-- OK -->
+      <button
+        class="btn-popup-ok"
+        [disabled]="activeSessionPopupLoading"
+        (click)="forceLogoutAndReVerify()"
+      >
+        <span *ngIf="!activeSessionPopupLoading">OK</span>
+        <span *ngIf="activeSessionPopupLoading" class="spinner"></span>
+      </button>
+
+      <!-- Cancel -->
+      <button
+        class="btn-popup-cancel"
+        [disabled]="activeSessionPopupLoading"
+        (click)="closeActiveSessionPopup()"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+</div>
