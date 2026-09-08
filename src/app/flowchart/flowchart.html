@@ -1,0 +1,573 @@
+<div class="fc-page">
+
+  <!-- ============================================================
+       TOP BAR
+  ============================================================= -->
+  <div class="fc-topbar">
+
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="fc-back-btn" (click)="goBack()">← Back to Login</button>
+      <div>
+        <div class="fc-title">System Workflow</div>
+        <div class="fc-hint">Hover any node to highlight its database tables on the right</div>
+      </div>
+    </div>
+
+    <div class="fc-tabs">
+      <button class="fc-tab" [class.active-login]="section==='login'" (click)="setSection('login')">
+        🔐 Login Flow
+      </button>
+      <button class="fc-tab" [class.active-admin]="section==='admin'" (click)="setSection('admin')">
+        🔑 Admin
+      </button>
+      <button class="fc-tab" [class.active-reviewer]="section==='reviewer'" (click)="setSection('reviewer')">
+        🔍 Reviewer
+      </button>
+      <button class="fc-tab" [class.active-fieldstaff]="section==='fieldstaff'" (click)="setSection('fieldstaff')">
+        🌿 Field Staff
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       BODY
+  ============================================================= -->
+  <div class="fc-body">
+
+    <!-- ──────────────────────────────────────────────────────────
+         LEFT: FLOWCHART
+    ─────────────────────────────────────────────────────────── -->
+    <div class="fc-chart">
+
+
+      <!-- ===================================================
+           LOGIN FLOW
+      ==================================================== -->
+      <ng-container *ngIf="section === 'login'">
+
+        <div class="fc-section-title">
+          <div class="fc-section-badge badge-login">🔐 User Login Workflow</div>
+          <div class="fc-section-sub">Includes OTP verification, session management, role-based redirect</div>
+        </div>
+
+        <!-- Legend -->
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:20px;font-size:11px;color:#64748b">
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:26px;height:12px;border-radius:20px;background:#1d4ed8;display:inline-block"></span>Start/End</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:26px;height:12px;border-radius:4px;border:2px solid #93c5fd;background:#fff;display:inline-block"></span>Action</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:14px;background:#1d4ed8;display:inline-block;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%)"></span>Decision</span>
+          <span style="display:flex;align-items:center;gap:5px"><span style="width:26px;height:12px;border-radius:4px;border:1.5px dashed #fca5a5;background:#fef2f2;display:inline-block"></span>Error</span>
+          <span style="display:flex;align-items:center;gap:5px;border:1px dashed #cbd5e1;padding:2px 8px;border-radius:4px">DB ×n = tables used</span>
+        </div>
+
+        <div class="fc-col">
+
+          <!-- START -->
+          <div class="fc-pill pill-login" (mouseenter)="hover('L1')" (mouseleave)="hover(null)">
+            🚀 Start
+          </div>
+          <div class="fc-conn" style="height:28px"></div>
+
+          <!-- 1. Open Welcome Page -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L2')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">🌐</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">1. Open Welcome Page</div>
+              <div class="fc-rect-sub">Role selection UI loads</div>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- 2. Select Role + Enter Credentials -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L3')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">✍️</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">2. Select Role + Enter Credentials</div>
+              <div class="fc-rect-sub">Email ID &amp; Password input</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- 3. Send HTTPS Request -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L4')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">📡</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">3. Send HTTPS Request</div>
+              <div class="fc-rect-sub">POST /api/auth/login</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- 4. Validate Input -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L5')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">✅</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">4. Validate Input</div>
+              <div class="fc-rect-sub">Check empty / format errors</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <!-- DECISION: Input Valid? -->
+          <div class="fc-diamond-wrap" style="width:340px;margin:0 auto">
+            <div class="fc-diamond diamond-login" style="width:170px;height:85px"
+              (mouseenter)="hover('L5')" (mouseleave)="hover(null)">
+              <div class="fc-diamond-txt">Input Valid?</div>
+            </div>
+            <span class="fc-yes-label">Yes ↓</span>
+            <span class="fc-no-label">No →</span>
+            <div class="fc-side-error" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%) translateX(100%)">
+              Return Error to UI<br><small style="font-weight:400">Validation message</small>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:34px"></div>
+
+          <!-- 5. Verify Password -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L5')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">🔒</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">5. Verify Password</div>
+              <div class="fc-rect-sub">SELECT users → bcrypt.compare()</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <!-- DECISION: Credentials Valid? -->
+          <div class="fc-diamond-wrap" style="width:340px;margin:0 auto">
+            <div class="fc-diamond diamond-red" style="width:170px;height:85px"
+              (mouseenter)="hover('L5')" (mouseleave)="hover(null)">
+              <div class="fc-diamond-txt">Credentials Valid?</div>
+            </div>
+            <span class="fc-yes-label">Yes ↓</span>
+            <span class="fc-no-label">No →</span>
+            <div class="fc-side-error" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%) translateX(100%)">
+              401 Unauthorized<br><small style="font-weight:400">Invalid email/password</small>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:34px"></div>
+
+          <!-- 6. Check Account Active -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L6')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">👁️</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">6. Check Account Status</div>
+              <div class="fc-rect-sub">is_active = TRUE in users table</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <!-- DECISION: Account Active? -->
+          <div class="fc-diamond-wrap" style="width:340px;margin:0 auto">
+            <div class="fc-diamond diamond-red" style="width:170px;height:85px"
+              (mouseenter)="hover('L6')" (mouseleave)="hover(null)">
+              <div class="fc-diamond-txt">Account Active?</div>
+            </div>
+            <span class="fc-yes-label">Yes ↓</span>
+            <span class="fc-no-label">No →</span>
+            <div class="fc-side-error" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%) translateX(100%)">
+              403 Forbidden<br><small style="font-weight:400">Account deactivated</small>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:34px"></div>
+
+          <!-- 7. Generate & Send OTP -->
+          <div class="fc-rect rect-login" style="border-color:#fbbf24" (mouseenter)="hover('L7')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon" style="background:#fffbeb">📱</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">7. Generate &amp; Send OTP</div>
+              <div class="fc-rect-sub">INSERT otp_tokens · OTP sent via email/SMS · expires in 10 min</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- 8. User Enters OTP -->
+          <div class="fc-rect rect-login" style="border-color:#fbbf24" (mouseenter)="hover('L8')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon" style="background:#fffbeb">🔢</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">8. User Enters OTP</div>
+              <div class="fc-rect-sub">POST /api/auth/verify-otp</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <!-- DECISION: OTP Valid? -->
+          <div class="fc-diamond-wrap" style="width:340px;margin:0 auto">
+            <div class="fc-diamond" style="background:#d97706;width:170px;height:85px"
+              (mouseenter)="hover('L8')" (mouseleave)="hover(null)">
+              <div class="fc-diamond-txt">OTP Valid &amp; Not Expired?</div>
+            </div>
+            <span class="fc-yes-label">Yes ↓</span>
+            <span class="fc-no-label">No →</span>
+            <div class="fc-side-error" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%) translateX(100%)">
+              OTP Invalid / Expired<br><small style="font-weight:400">Ask to resend</small>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:34px"></div>
+
+          <!-- 9. Create JWT + Session -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L9')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">🎟️</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">9. Create JWT + Session</div>
+              <div class="fc-rect-sub">INSERT user_sessions · JWT expires 1h</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- 10. Role-based Redirect -->
+          <div class="fc-rect rect-login" (mouseenter)="hover('L10')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-login">🧭</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">10. Role-based Redirect</div>
+              <div class="fc-rect-sub">Admin / Reviewer / Field Staff dashboard</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- END -->
+          <div class="fc-pill pill-end-login">
+            ✅ User Logged In — Dashboard Opens
+          </div>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ===================================================
+           ADMIN FLOW
+      ==================================================== -->
+      <ng-container *ngIf="section === 'admin'">
+
+        <div class="fc-section-title">
+          <div class="fc-section-badge badge-admin">🔑 Admin Workflow</div>
+          <div class="fc-section-sub">User management, role control, GIS layers, system oversight</div>
+        </div>
+
+        <div class="fc-col">
+
+          <div class="fc-pill pill-admin" (mouseenter)="hover('A1')" (mouseleave)="hover(null)">
+            🔐 Admin Login
+          </div>
+          <div class="fc-conn" style="height:28px"></div>
+          <div style="font-size:10.5px;color:#64748b;margin-bottom:6px">POST /api/auth/login + OTP verification</div>
+          <div class="fc-conn" style="height:12px"></div>
+
+          <div class="fc-rect rect-admin" (mouseenter)="hover('A2')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-admin">👥</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">Create / Manage Users</div>
+              <div class="fc-rect-sub">POST · PUT · PATCH /api/admin/users<br>Assign roles from role_table</div>
+            </div>
+            <span class="fc-db-badge">DB ×2</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <div class="fc-rect rect-admin" (mouseenter)="hover('A3')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-admin">🔄</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">Activate / Deactivate Users</div>
+              <div class="fc-rect-sub">PATCH /api/admin/users/:id/activate<br>PATCH /api/admin/users/:id/deactivate</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <div class="fc-rect rect-admin" (mouseenter)="hover('A4')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-admin">🗺️</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">Manage GIS Layers</div>
+              <div class="fc-rect-sub">POST · PUT · DELETE /api/admin/layers<br>Add / configure map layers</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <div class="fc-rect rect-admin" (mouseenter)="hover('A5')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-admin">📋</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">View All Requests &amp; History</div>
+              <div class="fc-rect-sub">GET /api/requests · Full audit trail</div>
+            </div>
+            <span class="fc-db-badge">DB ×2</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <div class="fc-pill pill-end-admin" (mouseenter)="hover('A6')" (mouseleave)="hover(null)">
+            🚪 Logout — Session Invalidated
+          </div>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ===================================================
+           REVIEWER FLOW
+      ==================================================== -->
+      <ng-container *ngIf="section === 'reviewer'">
+
+        <div class="fc-section-title">
+          <div class="fc-section-badge badge-reviewer">🔍 Reviewer Workflow</div>
+          <div class="fc-section-sub">Two-level approval: Level 1 Reviewer → Level 2 Reviewer</div>
+        </div>
+
+        <div class="fc-col">
+
+          <div class="fc-pill pill-reviewer" (mouseenter)="hover('R1')" (mouseleave)="hover(null)">
+            🔐 Reviewer Login + OTP
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- LEVEL 1 BOX -->
+          <div class="fc-level-box level-mgr">
+            <div class="fc-level-label lbl-mgr">Level 1 — Primary Reviewer</div>
+
+            <div class="fc-col">
+              <div class="fc-rect rect-reviewer" (mouseenter)="hover('R2')" (mouseleave)="hover(null)">
+                <div class="fc-rect-icon icon-reviewer">📥</div>
+                <div class="fc-rect-body">
+                  <div class="fc-rect-title">View Pending Requests</div>
+                  <div class="fc-rect-sub">GET /api/requests/pending-review-1</div>
+                </div>
+                <span class="fc-db-badge">DB ×2</span>
+              </div>
+              <div class="fc-conn" style="height:18px"></div>
+
+              <div class="fc-rect rect-reviewer fc-dashed" (mouseenter)="hover('R3')" (mouseleave)="hover(null)">
+                <div class="fc-rect-icon icon-reviewer">📸</div>
+                <div class="fc-rect-body">
+                  <div class="fc-rect-title">Review Plant + Images</div>
+                  <div class="fc-rect-sub">plant_data, plant_images, location</div>
+                </div>
+                <span class="fc-db-badge">DB ×2</span>
+              </div>
+              <div class="fc-conn" style="height:18px"></div>
+
+              <!-- Decision L1 -->
+              <div class="fc-diamond-wrap" style="width:310px">
+                <div class="fc-diamond diamond-reviewer" style="width:155px;height:78px"
+                  (mouseenter)="hover('R4')" (mouseleave)="hover(null)">
+                  <div class="fc-diamond-txt">Approve?</div>
+                </div>
+                <span class="fc-yes-label">Yes ↓</span>
+                <span class="fc-no-label">No →</span>
+                <div class="fc-side-error" style="position:absolute;right:-12px;top:50%;transform:translateY(-50%) translateX(100%)">
+                  status → REJECTED<br>PUT /:id/reject
+                </div>
+              </div>
+              <div class="fc-conn" style="height:28px"></div>
+
+              <div class="fc-rect rect-reviewer" style="background:#ecfdf5;border-color:#6ee7b7" (mouseenter)="hover('R4')" (mouseleave)="hover(null)">
+                <div class="fc-rect-icon" style="background:#d1fae5">✅</div>
+                <div class="fc-rect-body">
+                  <div class="fc-rect-title" style="color:#065f46">Status → PENDING_L2</div>
+                  <div class="fc-rect-sub" style="color:#047857">PUT /:id/approve-level1</div>
+                </div>
+                <span class="fc-db-badge">DB ×2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc-conn" style="height:24px"></div>
+
+          <!-- LEVEL 2 BOX -->
+          <div class="fc-level-box level-hr">
+            <div class="fc-level-label lbl-hr">Level 2 — Final Reviewer</div>
+
+            <div class="fc-col">
+              <div class="fc-rect rect-reviewer" style="border-color:#e9d5ff" (mouseenter)="hover('R5')" (mouseleave)="hover(null)">
+                <div class="fc-rect-icon icon-reviewer">📥</div>
+                <div class="fc-rect-body">
+                  <div class="fc-rect-title">View Pending L2 Requests</div>
+                  <div class="fc-rect-sub">GET /api/requests/pending-review-2</div>
+                </div>
+                <span class="fc-db-badge">DB ×2</span>
+              </div>
+              <div class="fc-conn" style="height:18px"></div>
+
+              <!-- Decision L2 -->
+              <div class="fc-diamond-wrap" style="width:310px">
+                <div class="fc-diamond" style="background:#9333ea;width:155px;height:78px"
+                  (mouseenter)="hover('R5')" (mouseleave)="hover(null)">
+                  <div class="fc-diamond-txt">Final Approve?</div>
+                </div>
+                <span class="fc-yes-label">Yes ↓</span>
+                <span class="fc-no-label">No →</span>
+                <div class="fc-side-error" style="position:absolute;right:-12px;top:50%;transform:translateY(-50%) translateX(100%)">
+                  status → REJECTED<br>PUT /:id/reject
+                </div>
+              </div>
+              <div class="fc-conn" style="height:28px"></div>
+
+              <div class="fc-rect" style="background:#ecfdf5;border:2px solid #6ee7b7;min-width:220px" (mouseenter)="hover('R5')" (mouseleave)="hover(null)">
+                <div class="fc-rect-icon" style="background:#d1fae5">🌿</div>
+                <div class="fc-rect-body">
+                  <div class="fc-rect-title" style="color:#065f46">Plant Saved · status = APPROVED</div>
+                  <div class="fc-rect-sub" style="color:#047857">INSERT plant_data · PUT /:id/approve-final</div>
+                </div>
+                <span class="fc-db-badge">DB ×2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="fc-conn" style="height:24px"></div>
+          <div class="fc-pill pill-end-reviewer">✅ Review Complete</div>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- ===================================================
+           FIELD STAFF FLOW
+      ==================================================== -->
+      <ng-container *ngIf="section === 'fieldstaff'">
+
+        <div class="fc-section-title">
+          <div class="fc-section-badge badge-field">🌿 Field Staff Workflow</div>
+          <div class="fc-section-sub">Register · Login with OTP · Submit plant · Track status</div>
+        </div>
+
+        <div class="fc-col">
+
+          <div class="fc-pill pill-field" (mouseenter)="hover('F1')" (mouseleave)="hover(null)">
+            🚀 Start
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <div class="fc-rect rect-field" (mouseenter)="hover('F1')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-field">📋</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">1. Register Account</div>
+              <div class="fc-rect-sub">POST /api/auth/register · role = FIELD_STAFF auto-assigned</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <div class="fc-rect rect-field" (mouseenter)="hover('F2')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-field">🔐</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">2. Login + OTP Verification</div>
+              <div class="fc-rect-sub">POST /api/auth/login → OTP → session created</div>
+            </div>
+            <span class="fc-db-badge">DB ×3</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <div class="fc-rect rect-field" (mouseenter)="hover('F3')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-field">🌿</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">3. Submit Plant Observation</div>
+              <div class="fc-rect-sub">Plant name · GPS location · 1–10 photos<br>POST /api/plants (multipart)</div>
+            </div>
+            <span class="fc-db-badge">DB ×2</span>
+          </div>
+          <div class="fc-conn" style="height:14px"></div>
+          <div style="font-size:10.5px;color:#64748b;margin-bottom:6px">status = PENDING_REVIEW · level = 1</div>
+          <div class="fc-conn" style="height:10px"></div>
+          <div class="fc-conn" style="height:14px"></div>
+
+          <div class="fc-rect rect-field fc-dashed" (mouseenter)="hover('F4')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-field">⏳</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">4. Track Request Status</div>
+              <div class="fc-rect-sub">GET /api/plants/my · PENDING / APPROVED / REJECTED</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:20px"></div>
+
+          <!-- DECISION -->
+          <div class="fc-diamond-wrap" style="width:340px;margin:0 auto">
+            <div class="fc-diamond" style="background:#059669;width:170px;height:85px"
+              (mouseenter)="hover('F5')" (mouseleave)="hover(null)">
+              <div class="fc-diamond-txt">Request Outcome?</div>
+            </div>
+            <span class="fc-yes-label" style="color:#059669">APPROVED ↓</span>
+            <span class="fc-no-label" style="color:#dc2626">REJECTED →</span>
+            <div class="fc-side-error" style="position:absolute;right:-10px;top:50%;transform:translateY(-50%) translateX(100%)">
+              Reason in history<br><small style="font-weight:400">comments field</small>
+            </div>
+          </div>
+          <div class="fc-conn" style="height:34px"></div>
+
+          <div class="fc-rect rect-field" (mouseenter)="hover('F6')" (mouseleave)="hover(null)">
+            <div class="fc-rect-icon icon-field">📊</div>
+            <div class="fc-rect-body">
+              <div class="fc-rect-title">5. View Approved Plant on Map</div>
+              <div class="fc-rect-sub">GIS map shows plant location · GET /api/plants/:id</div>
+            </div>
+            <span class="fc-db-badge">DB ×1</span>
+          </div>
+          <div class="fc-conn" style="height:24px"></div>
+
+          <div class="fc-pill pill-end-field">🌿 Plant Identified &amp; Mapped</div>
+
+        </div>
+
+      </ng-container>
+
+
+    </div><!-- /fc-chart -->
+
+
+    <!-- ──────────────────────────────────────────────────────────
+         RIGHT: DATABASE PANEL
+    ─────────────────────────────────────────────────────────── -->
+    <div class="fc-db">
+
+      <div class="fc-db-header">
+        <div class="fc-db-title">🗄️ Database Tables</div>
+        <div class="fc-db-hint" [class.active]="!!hovered">
+          <ng-container *ngIf="hovered">{{ activeTables.length }} table(s) active</ng-container>
+          <ng-container *ngIf="!hovered">Hover a node to highlight</ng-container>
+        </div>
+      </div>
+
+      <div class="fc-db-tables">
+        <div
+          *ngFor="let t of tables"
+          class="fc-db-table"
+          [class.hl]="active(t.name)"
+        >
+          <div class="fc-tname" [class.hl]="active(t.name)">
+            <span class="fc-tname-text">{{ t.icon }} {{ t.name }}</span>
+            <span class="fc-active-badge" *ngIf="active(t.name)">ACTIVE</span>
+          </div>
+          <div class="fc-cols">
+            <div class="fc-col-row" *ngFor="let c of t.cols">
+              <span class="fc-col-icon"
+                [class.pk]="c.pk"
+                [class.fk]="c.fk && !c.pk"
+                [class.reg]="!c.pk && !c.fk">
+                {{ c.pk ? '🔑' : c.fk ? '🔗' : '▪' }}
+              </span>
+              <span class="fc-col-name">{{ c.name }}</span>
+              <span class="fc-col-type">{{ c.type }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fc-db-footer">
+        <span>🔑 PK</span>
+        <span>🔗 FK</span>
+        <span>▪ Col</span>
+      </div>
+
+    </div><!-- /fc-db -->
+
+  </div><!-- /fc-body -->
+
+</div>

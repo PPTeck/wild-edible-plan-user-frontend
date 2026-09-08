@@ -255,3 +255,50 @@
   flex-shrink: 0;
 }
 .eye-btn:hover { color: #14532d; }
+
+/* ── Workflow / Flowchart Button ───────────────── */
+.workflow-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  width: 100%;
+  max-width: 440px;
+  padding: 13px 20px;
+  background: #14532d;
+  border: 2px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  text-decoration: none;
+  color: #e2f5e9;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  cursor: pointer;
+}
+
+.workflow-btn:hover {
+  background: #14532d;
+  border-color: rgba(110, 231, 183, 0.6);
+  transform: translateY(-1px);
+}
+
+.workflow-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.workflow-label {
+  flex: 1;
+}
+
+.workflow-arrow {
+  font-size: 16px;
+  opacity: 0.7;
+  transition: transform 0.15s;
+}
+
+.workflow-btn:hover .workflow-arrow {
+  transform: translateX(3px);
+  opacity: 1;
+}
