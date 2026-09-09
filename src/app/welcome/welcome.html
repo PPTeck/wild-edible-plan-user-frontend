@@ -51,11 +51,11 @@
       </div>
 
       <div class="alert-error" *ngIf="errorMsg">❌ {{ errorMsg }}</div>
-
       <div class="field">
         <label class="field-label">Email ID <span class="req">*</span></label>
         <input class="field-input" type="email" [(ngModel)]="emailId"
-               placeholder="e.g. admin@test.com" (keyup.enter)="login()" />
+               placeholder="e.g. admin@test.com" (ngModelChange)="onEmailChange()"
+               (keyup.enter)="login()" />
       </div>
 
       <div class="field">
@@ -82,7 +82,7 @@
       </div>
 
       <button class="btn-login"
-              [disabled]="!emailId.trim() || !password || loading"
+              [disabled]="!emailId.trim() || !password || loading || isLocked"
               (click)="login()">
         <span *ngIf="!loading">Login →</span>
         <span *ngIf="loading">Verifying…</span>
