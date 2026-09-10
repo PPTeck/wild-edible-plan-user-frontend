@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { MapComponent }       from '../map/map';
+import { CairgisMapDisplayComponent } from '../cairgis-map-display/cairgis-map-display';
+//import { MapComponent } from '../map/map';
 import { TerrainComponent }   from '../terrain/terrain';
 import { PlantComponent }     from '../plant/plant';
 import { UserMenuComponent }  from '../user-menu/user-menu';
 import { UserSessionService } from '../services/user-session.service';
+import { MapComponent } from '../map/map';
 
 @Component({
   selector: 'app-portal',
   standalone: true,
-  imports: [MapComponent, TerrainComponent, PlantComponent, UserMenuComponent, RouterLink],
+  imports: [CairgisMapDisplayComponent, TerrainComponent, PlantComponent, UserMenuComponent, RouterLink],
+ //imports: [MapComponent, TerrainComponent, PlantComponent, UserMenuComponent, RouterLink],
   template: `
-    <app-map></app-map>
+    <app-cairgis-map-display></app-cairgis-map-display>
+    // <app-map></app-map>
     <app-terrain></app-terrain>
     <app-plant></app-plant>
 
