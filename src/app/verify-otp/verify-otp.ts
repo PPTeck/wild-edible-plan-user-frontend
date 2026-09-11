@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserSessionService } from '../services/user-session.service';
 
-const API             = 'http://192.168.29.216:8080/api';
-const DESTINATION_APP = 'http://192.168.29.216:4200';
+const API             = 'http://192.168.29.218:8080/api';
+const DESTINATION_APP = 'http://192.168.29.218:4200';
 
 @Component({
   selector: 'app-verify-otp',
@@ -90,7 +90,7 @@ export class VerifyOtpComponent implements OnInit {
           this.showActiveSessionPopup = false;
           this.cdr.markForCheck();
           setTimeout(() => {
-            window.location.href = 'http://192.168.29.216:8200/welcome';
+            window.location.href = 'http://192.168.29.218:8200/welcome';
           }, 100);
           return;
         }
