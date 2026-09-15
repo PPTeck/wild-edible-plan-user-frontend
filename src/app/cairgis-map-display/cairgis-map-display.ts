@@ -18,7 +18,7 @@ export class CairgisMapDisplayComponent implements AfterViewInit, OnDestroy {
 
   private map?: Map;
 
-  readonly cairgisUrl = 'https://192.24.10.201:8080/IGIST/ids/cairgis';
+  readonly cairgisUrl = 'https://192.24.10.209:8080/IGIST/ids/cairgis';
   readonly cairgisLayer = '100,Satellite';
   readonly projectionCode = 'EPSG:4326';
   readonly matrixIds = Array.from({ length: 16 }, (_, index) => `${this.projectionCode}:${index}`);

@@ -32,6 +32,10 @@ export const routes: Routes = [
     path: '',
     loadComponent: () => import('./portal/portal').then(m => m.PortalComponent),
   },
+  {
+    path: 'cairgis',
+    loadComponent: () => import('./cairgis-map-display/cairgis-map-display').then(m => m.CairgisMapDisplayComponent),
+  },
   // ── Admin Console ─────────────────────────────────────────
   {
     path: 'admin',
