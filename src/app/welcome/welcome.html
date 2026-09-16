@@ -1,4 +1,17 @@
 <div class="welcome-page">
+  <div class="deactivated-backdrop" *ngIf="showDeactivatedPopup" (click)="closeDeactivatedPopup()">
+    <section class="deactivated-popup" role="alertdialog" aria-modal="true"
+             aria-labelledby="deactivated-title" (click)="$event.stopPropagation()">
+      <div class="deactivated-icon" aria-hidden="true">!</div>
+      <h2 id="deactivated-title">Login unavailable</h2>
+      <p>Your account has been deactivated, so you cannot log in right now.</p>
+      <p class="deactivated-help">Please contact the administrator to reactivate your account.</p>
+      <button type="button" class="deactivated-close" (click)="closeDeactivatedPopup()">
+        OK, understood
+      </button>
+    </section>
+  </div>
+
   <div class="welcome-card">
 
     <!-- Brand -->

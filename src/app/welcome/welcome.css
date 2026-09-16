@@ -9,6 +9,75 @@
   padding: 28px 16px;
 }
 
+/* Deactivated account dialog */
+.deactivated-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 32, 39, 0.68);
+  animation: fadeIn 0.18s ease;
+}
+.deactivated-popup {
+  width: min(100%, 380px);
+  padding: 30px 28px 26px;
+  text-align: center;
+  background: #fff;
+  border-top: 5px solid #dc2626;
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  animation: popupIn 0.2s ease;
+}
+.deactivated-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 25px;
+  font-weight: 800;
+}
+.deactivated-popup h2 {
+  margin: 0 0 10px;
+  color: #1f2937;
+  font-size: 21px;
+}
+.deactivated-popup p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.deactivated-popup .deactivated-help {
+  margin-top: 8px;
+  color: #6b7280;
+}
+.deactivated-close {
+  width: 100%;
+  margin-top: 22px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #14532d;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.deactivated-close:hover { background: #166534; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* ── Card ──────────────────────────────────────── */
 .welcome-card {
   background: #fff;

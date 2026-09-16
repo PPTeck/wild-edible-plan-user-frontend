@@ -34,6 +34,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   showPassword  = false;    // eye icon toggle
   loading       = false;
   errorMsg      = '';
+  showDeactivatedPopup = false;
   lockoutSeconds = 0;
   private lockedEmail = '';
   private lockedUserName = '';
@@ -128,6 +129,11 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  closeDeactivatedPopup(): void {
+    this.showDeactivatedPopup = false;
+    this.cdr.markForCheck();
+  }
+
   login(): void {
     if (!this.selectedRole || !this.emailId.trim() || !this.password || this.isLocked) return;
 
@@ -150,7 +156,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         this.router.navigate(['/verify-otp']);
       },
       error: err => {
-        if (err.status === 429 && err.error?.error === 'account_locked') {
+        if (err.status === 403 && err.error?.error === 'account_deactivated') {
+          this.showDeactivatedPopup = true;
+          this.errorMsg = '';
+        } else if (err.status === 429 && err.error?.error === 'account_locked') {
           const lockedUserName = err.error.userName ?? this.emailId.trim();
           this.lockedEmail = this.emailId.trim().toLowerCase();
           this.lockedUserName = lockedUserName;
