@@ -156,7 +156,9 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         this.router.navigate(['/verify-otp']);
       },
       error: err => {
-        if (err.status === 403 && err.error?.error === 'account_deactivated') {
+        if (err.status === 403 && err.error?.error === 'account_blocked') {
+          this.errorMsg = 'This account is blocked. Please contact the administrator to unblock it.';
+        } else if (err.status === 403 && err.error?.error === 'account_deactivated') {
           this.showDeactivatedPopup = true;
           this.errorMsg = '';
         } else if (err.status === 429 && err.error?.error === 'account_locked') {
