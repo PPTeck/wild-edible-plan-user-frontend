@@ -1,0 +1,131 @@
+{
+  "WELCOME": {
+    "BRAND_TITLE": "Web GIS Plant Portal",
+    "BRAND_SUB": "Wild Edible Plant Database & GIS System",
+    "SELECT_ROLE": "Select your role",
+    "LOADING_ROLES": "Loading roles…",
+    "SELECT_ROLE_HINT": "Please select a role above to proceed with login",
+    "LOGGING_IN_AS": "Logging in as",
+    "EMAIL": "Email ID",
+    "PASSWORD": "Password",
+    "EMAIL_PLACEHOLDER": "e.g. admin@test.com",
+    "PASSWORD_PLACEHOLDER": "Enter your password",
+    "HIDE_PASSWORD": "Hide password",
+    "SHOW_PASSWORD": "Show password",
+    "LOGIN": "Login →",
+    "VERIFYING": "Verifying…",
+    "FORGOT_PASSWORD": "Forgot Password?"
+  },
+
+
+  "OTP": {
+  "TITLE": "OTP Verification",
+  "SUBTITLE": "A 6-digit OTP was sent to your registered email",
+  "OTP_LABEL": "OTP",
+  "HELLO": "Hello",
+  "ENTER_OTP": "Enter OTP",
+  "VERIFY": "Verify OTP",
+  "VERIFYING": "Verifying…",
+  "BACK_TO_LOGIN": "← Back to Login",
+  "ALREADY_LOGGED_IN": "Already Logged In",
+  "ACTIVE_SESSION_MESSAGE": "Your account is currently active on another device or browser.",
+  "ACTIVE_SESSION_ACTION": "Click OK to log out from that device and continue here.",
+  "OK": "OK",
+  "CANCEL": "Cancel"
+},
+
+
+"FORGOT_PASSWORD": {
+  "TITLE": "Forgot Password",
+  "SUBTITLE": "Reset your account password",
+  "EMAIL_INFO": "Enter your registered email to receive a reset OTP.",
+  "EMAIL": "Email ID",
+  "EMAIL_PLACEHOLDER": "e.g. admin@test.com",
+  "SEND_OTP": "Send OTP →",
+  "SENDING": "Sending…",
+  "BACK_TO_LOGIN": "← Back to Login",
+  "OTP_INFO": "OTP sent to",
+  "OTP_INFO_END": "Enter the 6-digit code below.",
+  "DEV_OTP": "🛠 Dev OTP:",
+  "OTP_CODE": "OTP Code",
+  "VERIFY_OTP": "Verify OTP",
+  "BACK": "← Back",
+  "RESET_INFO": "Enter and confirm your new password.",
+  "NEW_PASSWORD": "New Password",
+  "NEW_PASSWORD_PLACEHOLDER": "Min. 6 characters",
+  "CONFIRM_PASSWORD": "Confirm Password",
+  "CONFIRM_PASSWORD_PLACEHOLDER": "Repeat new password",
+  "RESET_PASSWORD": "Reset Password",
+  "RESETTING": "Resetting…",
+  "SUCCESS_TITLE": "Password Reset Successful!",
+  "SUCCESS_MESSAGE": "Your password has been updated. Redirecting to login…",
+  "GO_TO_LOGIN": "Go to Login"
+},
+
+
+"TERRAIN": {
+  "TERRAIN": "Terrain",
+  "TERRAIN_ANALYSIS": "Terrain Analysis",
+  "PICK_HINT": "Click on the map to pick the",
+  "TOP_LEFT": "Top-Left",
+  "BOTTOM_RIGHT": "Bottom-Right",
+  "CORNER": "corner",
+  "CANCEL": "Cancel",
+  "CLOSE": "Close",
+  "SELECT_AOI": "Select AOI",
+  "LEFT_LONGITUDE": "Left Longitude",
+  "TOP_LATITUDE": "Top Latitude",
+  "RIGHT_LONGITUDE": "Right Longitude",
+  "BOTTOM_LATITUDE": "Bottom Latitude",
+  "ENTER_VALUE": "Enter Value",
+  "PICK_TOP_LEFT": "Pick Top-Left from map",
+  "PICK_BOTTOM_RIGHT": "Pick Bottom-Right from map",
+  "VERTICAL_ANGLE": "Vertical Angle",
+  "AZIMUTH": "Azimuth",
+  "DEG": "Deg",
+  "RESET": "Reset",
+  "PROCESSING": "Processing…",
+  "GENERATE": "Generate"
+},
+
+"CHANGE_PASSWORD": {
+  "TITLE": "Change Password",
+  "SUBTITLE": "Update your account password",
+
+  "CURRENT_PASSWORD": "Current Password",
+  "CURRENT_PASSWORD_PLACEHOLDER": "Enter current password",
+
+  "NEW_PASSWORD": "New Password",
+  "NEW_PASSWORD_PLACEHOLDER": "Min. 6 characters",
+
+  "CONFIRM_NEW_PASSWORD": "Confirm New Password",
+  "CONFIRM_PASSWORD_PLACEHOLDER": "Repeat new password",
+
+  "SHOW_CURRENT_PASSWORD": "Show current password",
+  "HIDE_CURRENT_PASSWORD": "Hide current password",
+
+  "SHOW_NEW_PASSWORD": "Show new password",
+  "HIDE_NEW_PASSWORD": "Hide new password",
+
+  "SHOW_CONFIRMED_PASSWORD": "Show confirmed password",
+  "HIDE_CONFIRMED_PASSWORD": "Hide confirmed password",
+
+  "SHOW_PASSWORD": "Show password",
+  "HIDE_PASSWORD": "Hide password",
+
+  "CANCEL": "Cancel",
+  "UPDATE_PASSWORD": "Update Password",
+  "UPDATING": "Updating…",
+
+  "ERROR_ALL_FIELDS": "All fields are required",
+  "ERROR_PASSWORD_MISMATCH": "New passwords do not match",
+  "ERROR_MIN_LENGTH": "New password must be at least 6 characters",
+  "SUCCESS": "✅ Password changed successfully!",
+  "ERROR_FAILED": "Failed to change password"
+},
+"USER_MENU": {
+  "ACCOUNT": "Account",
+  "CHANGE_PASSWORD": "Change Password",
+  "LOGOUT": "Logout"
+}
+}

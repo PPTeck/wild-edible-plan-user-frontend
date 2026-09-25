@@ -1,5 +1,10 @@
 <!-- Plant Menu Button -->
-<button class="plant-menu-btn" (click)="togglePanel()" title="Plant Data">
+<button
+  *ngIf="!menuHidden"
+  class="plant-menu-btn"
+  (click)="togglePanel()"
+  title="Plant Data"
+>
   <span class="icon">🌿</span>
   <span class="label">Plants</span>
 </button>

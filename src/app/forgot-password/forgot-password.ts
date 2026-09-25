@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 const API = 'http://192.168.29.69:8080/api';
 
@@ -11,12 +12,12 @@ type Step = 'email' | 'otp' | 'reset' | 'done';
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './forgot-password.html',
   styleUrl: './forgot-password.css',
   // Default change detection — Angular detects all state changes automatically
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
 
   step: Step = 'email';
 
@@ -40,10 +41,18 @@ export class ForgotPasswordComponent {
   resetError      = '';
 
   constructor(
-    private http:   HttpClient,
+    private http: HttpClient,
     private router: Router,
-    private cdr:     ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
+    private translate: TranslateService,
   ) {}
+
+  ngOnInit(): void {
+    const savedLanguage =
+      sessionStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
+
+    this.translate.use(savedLanguage ?? 'en');
+  }
 
   // ── Step 1: send OTP to email ──────────────────────────
   sendOtp(): void {
@@ -110,6 +119,7 @@ export class ForgotPasswordComponent {
       this.resetError = 'Passwords do not match';
       return;
     }
+
     if (this.newPassword.length < 6) {
       this.resetError = 'Password must be at least 6 characters';
       return;
@@ -120,14 +130,15 @@ export class ForgotPasswordComponent {
 
     this.http.post<any>(`${API}/auth/forgot-password`, {
       step: 3,
-      userId:      this.userId,
-      otpCode:     this.otpCode.trim(),
+      userId: this.userId,
+      otpCode: this.otpCode.trim(),
       newPassword: this.newPassword,
     }).subscribe({
       next: () => {
         this.resetLoading = false;
         this.step         = 'done';
         this.cdr.markForCheck();
+
         setTimeout(() => this.router.navigate(['/welcome']), 2000);
       },
       error: err => {
@@ -138,5 +149,7 @@ export class ForgotPasswordComponent {
     });
   }
 
-  goToLogin(): void { this.router.navigate(['/welcome']); }
+  goToLogin(): void {
+    this.router.navigate(['/welcome']);
+  }
 }

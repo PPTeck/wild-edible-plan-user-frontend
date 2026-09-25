@@ -1,0 +1,131 @@
+{
+  "WELCOME": {
+    "BRAND_TITLE": "वेब GIS प्लांट पोर्टल",
+    "BRAND_SUB": "जंगली खाद्य पौधों का डेटाबेस और GIS सिस्टम",
+    "SELECT_ROLE": "अपनी भूमिका चुनें",
+    "LOADING_ROLES": "भूमिकाएँ लोड हो रही हैं…",
+    "SELECT_ROLE_HINT": "लॉगिन करने के लिए ऊपर से अपनी भूमिका चुनें",
+    "LOGGING_IN_AS": "इस भूमिका से लॉगिन कर रहे हैं",
+    "EMAIL": "ईमेल आईडी",
+    "PASSWORD": "पासवर्ड",
+    "EMAIL_PLACEHOLDER": "जैसे admin@test.com",
+    "PASSWORD_PLACEHOLDER": "अपना पासवर्ड दर्ज करें",
+    "HIDE_PASSWORD": "पासवर्ड छुपाएँ",
+    "SHOW_PASSWORD": "पासवर्ड दिखाएँ",
+    "LOGIN": "लॉगिन →",
+    "VERIFYING": "सत्यापित किया जा रहा है…",
+    "FORGOT_PASSWORD": "पासवर्ड भूल गए?"
+  },
+
+
+  "OTP": {
+  "TITLE": "OTP सत्यापन",
+  "SUBTITLE": "आपके पंजीकृत ईमेल पर 6 अंकों का OTP भेजा गया है",
+  "OTP_LABEL": "OTP",
+  "HELLO": "नमस्ते",
+  "ENTER_OTP": "OTP दर्ज करें",
+  "VERIFY": "OTP सत्यापित करें",
+  "VERIFYING": "सत्यापित किया जा रहा है…",
+  "BACK_TO_LOGIN": "← लॉगिन पर वापस जाएँ",
+  "ALREADY_LOGGED_IN": "पहले से लॉगिन है",
+  "ACTIVE_SESSION_MESSAGE": "आपका अकाउंट वर्तमान में किसी अन्य डिवाइस या ब्राउज़र पर सक्रिय है।",
+  "ACTIVE_SESSION_ACTION": "उस डिवाइस से लॉगआउट करके यहाँ जारी रखने के लिए OK पर क्लिक करें।",
+  "OK": "OK",
+  "CANCEL": "रद्द करें"
+},
+
+"FORGOT_PASSWORD": {
+  "TITLE": "पासवर्ड भूल गए",
+  "SUBTITLE": "अपने अकाउंट का पासवर्ड रीसेट करें",
+  "EMAIL_INFO": "रीसेट OTP प्राप्त करने के लिए अपना पंजीकृत ईमेल दर्ज करें।",
+  "EMAIL": "ईमेल आईडी",
+  "EMAIL_PLACEHOLDER": "जैसे admin@test.com",
+  "SEND_OTP": "OTP भेजें →",
+  "SENDING": "भेजा जा रहा है…",
+  "BACK_TO_LOGIN": "← लॉगिन पर वापस जाएँ",
+  "OTP_INFO": "OTP भेजा गया है",
+  "OTP_INFO_END": "नीचे 6 अंकों का कोड दर्ज करें।",
+  "DEV_OTP": "🛠 Dev OTP:",
+  "OTP_CODE": "OTP कोड",
+  "VERIFY_OTP": "OTP सत्यापित करें",
+  "BACK": "← वापस",
+  "RESET_INFO": "अपना नया पासवर्ड दर्ज करें और उसकी पुष्टि करें।",
+  "NEW_PASSWORD": "नया पासवर्ड",
+  "NEW_PASSWORD_PLACEHOLDER": "कम से कम 6 अक्षर",
+  "CONFIRM_PASSWORD": "पासवर्ड की पुष्टि करें",
+  "CONFIRM_PASSWORD_PLACEHOLDER": "नया पासवर्ड दोबारा दर्ज करें",
+  "RESET_PASSWORD": "पासवर्ड रीसेट करें",
+  "RESETTING": "रीसेट किया जा रहा है…",
+  "SUCCESS_TITLE": "पासवर्ड सफलतापूर्वक रीसेट हो गया!",
+  "SUCCESS_MESSAGE": "आपका पासवर्ड अपडेट हो गया है। लॉगिन पर भेजा जा रहा है…",
+  "GO_TO_LOGIN": "लॉगिन पर जाएँ"
+},
+
+
+"TERRAIN": {
+  "TERRAIN": "टेरेन",
+  "TERRAIN_ANALYSIS": "टेरेन विश्लेषण",
+  "PICK_HINT": "चयन करने के लिए मानचित्र पर क्लिक करें",
+  "TOP_LEFT": "ऊपरी-बायाँ",
+  "BOTTOM_RIGHT": "निचला-दायाँ",
+  "CORNER": "कोना",
+  "CANCEL": "रद्द करें",
+  "CLOSE": "बंद करें",
+  "SELECT_AOI": "AOI चुनें",
+  "LEFT_LONGITUDE": "बायाँ देशांतर",
+  "TOP_LATITUDE": "ऊपरी अक्षांश",
+  "RIGHT_LONGITUDE": "दायाँ देशांतर",
+  "BOTTOM_LATITUDE": "निचला अक्षांश",
+  "ENTER_VALUE": "मान दर्ज करें",
+  "PICK_TOP_LEFT": "मानचित्र से ऊपरी-बाएँ बिंदु चुनें",
+  "PICK_BOTTOM_RIGHT": "मानचित्र से निचले-दाएँ बिंदु चुनें",
+  "VERTICAL_ANGLE": "ऊर्ध्व कोण",
+  "AZIMUTH": "दिगंश",
+  "DEG": "डिग्री",
+  "RESET": "रीसेट",
+  "PROCESSING": "प्रोसेसिंग…",
+  "GENERATE": "जनरेट करें"
+},
+
+"CHANGE_PASSWORD": {
+  "TITLE": "पासवर्ड बदलें",
+  "SUBTITLE": "अपने अकाउंट का पासवर्ड अपडेट करें",
+
+  "CURRENT_PASSWORD": "वर्तमान पासवर्ड",
+  "CURRENT_PASSWORD_PLACEHOLDER": "वर्तमान पासवर्ड दर्ज करें",
+
+  "NEW_PASSWORD": "नया पासवर्ड",
+  "NEW_PASSWORD_PLACEHOLDER": "कम से कम 6 अक्षर",
+
+  "CONFIRM_NEW_PASSWORD": "नए पासवर्ड की पुष्टि करें",
+  "CONFIRM_PASSWORD_PLACEHOLDER": "नया पासवर्ड दोबारा दर्ज करें",
+
+  "SHOW_CURRENT_PASSWORD": "वर्तमान पासवर्ड दिखाएँ",
+  "HIDE_CURRENT_PASSWORD": "वर्तमान पासवर्ड छुपाएँ",
+
+  "SHOW_NEW_PASSWORD": "नया पासवर्ड दिखाएँ",
+  "HIDE_NEW_PASSWORD": "नया पासवर्ड छुपाएँ",
+
+  "SHOW_CONFIRMED_PASSWORD": "पुष्टि किया गया पासवर्ड दिखाएँ",
+  "HIDE_CONFIRMED_PASSWORD": "पुष्टि किया गया पासवर्ड छुपाएँ",
+
+  "SHOW_PASSWORD": "पासवर्ड दिखाएँ",
+  "HIDE_PASSWORD": "पासवर्ड छुपाएँ",
+
+  "CANCEL": "रद्द करें",
+  "UPDATE_PASSWORD": "पासवर्ड अपडेट करें",
+  "UPDATING": "अपडेट किया जा रहा है…",
+
+  "ERROR_ALL_FIELDS": "सभी फ़ील्ड आवश्यक हैं",
+  "ERROR_PASSWORD_MISMATCH": "नए पासवर्ड मेल नहीं खाते हैं",
+  "ERROR_MIN_LENGTH": "नया पासवर्ड कम से कम 6 अक्षरों का होना चाहिए",
+  "SUCCESS": "✅ पासवर्ड सफलतापूर्वक बदल दिया गया!",
+  "ERROR_FAILED": "पासवर्ड बदलने में विफल"
+},
+
+"USER_MENU": {
+  "ACCOUNT": "अकाउंट",
+  "CHANGE_PASSWORD": "पासवर्ड बदलें",
+  "LOGOUT": "लॉगआउट"
+}
+}

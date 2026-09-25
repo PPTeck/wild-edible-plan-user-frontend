@@ -1,1 +1,9 @@
 <div id="map" class="map"></div>
+
+<button
+  class="language-toggle"
+  type="button"
+  (click)="toggleLanguage()"
+>
+  {{ currentLanguage === 'en' ? 'हिन्दी' : 'English' }}
+</button>

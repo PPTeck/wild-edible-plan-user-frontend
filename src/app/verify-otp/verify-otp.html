@@ -4,23 +4,23 @@
     <!-- Header -->
     <div class="otp-header">
       <span class="otp-icon">📱</span>
-      <h2 class="otp-title">OTP Verification</h2>
+      <h2 class="otp-title">{{ 'OTP.TITLE' | translate }}</h2>
       <p class="otp-sub">
-        A 6-digit OTP was sent to your registered email
+        {{ 'OTP.SUBTITLE' | translate }}
         <strong *ngIf="phoneMasked"> {{ phoneMasked }}</strong>
       </p>
     </div>
 
     <!-- Dev hint: show OTP for testing -->
     <div class="dev-hint" *ngIf="devOtp">
-      OTP
+      {{ 'OTP.OTP_LABEL' | translate }}
     </div>
 
     <!-- Body -->
     <div class="otp-body">
 
       <div class="greeting" *ngIf="userName">
-        Hello, <strong>{{ userName }}</strong> 👋
+        {{ 'OTP.HELLO' | translate }}, <strong>{{ userName }}</strong> 👋
       </div>
 
       <!-- Error -->
@@ -28,20 +28,32 @@
 
       <!-- OTP input -->
       <div class="field">
-        <label class="field-label">Enter OTP <span class="req">*</span></label>
-        <input class="otp-input" type="text" [(ngModel)]="otpCode"
-               maxlength="6" placeholder="_ _ _ _ _ _"
-               (keyup.enter)="verify()" />
+        <label class="field-label">
+          {{ 'OTP.ENTER_OTP' | translate }} <span class="req">*</span>
+        </label>
+
+        <input
+          class="otp-input"
+          type="text"
+          [(ngModel)]="otpCode"
+          maxlength="6"
+          placeholder="_ _ _ _ _ _"
+          (keyup.enter)="verify()"
+        />
       </div>
 
-      <button class="btn-verify"
-              [disabled]="otpCode.length < 6 || loading"
-              (click)="verify()">
-        <span *ngIf="!loading">Verify OTP</span>
-        <span *ngIf="loading">Verifying…</span>
+      <button
+        class="btn-verify"
+        [disabled]="otpCode.length < 6 || loading"
+        (click)="verify()"
+      >
+        <span *ngIf="!loading">{{ 'OTP.VERIFY' | translate }}</span>
+        <span *ngIf="loading">{{ 'OTP.VERIFYING' | translate }}</span>
       </button>
 
-      <button class="btn-back" (click)="back()">← Back to Login</button>
+      <button class="btn-back" (click)="back()">
+        {{ 'OTP.BACK_TO_LOGIN' | translate }}
+      </button>
 
     </div>
   </div>
@@ -60,12 +72,14 @@
     <div class="session-popup-icon">⚠️</div>
 
     <!-- Title -->
-    <h3 class="session-popup-title">Already Logged In</h3>
+    <h3 class="session-popup-title">
+      {{ 'OTP.ALREADY_LOGGED_IN' | translate }}
+    </h3>
 
     <!-- Message -->
     <p class="session-popup-msg">
-      Your account is currently active on another device or browser.<br/>
-      Click <strong>OK</strong> to log out from that device and continue here.
+      {{ 'OTP.ACTIVE_SESSION_MESSAGE' | translate }}<br/>
+      {{ 'OTP.ACTIVE_SESSION_ACTION' | translate }}
     </p>
 
     <!-- Buttons -->
@@ -77,7 +91,10 @@
         [disabled]="activeSessionPopupLoading"
         (click)="forceLogoutAndReVerify()"
       >
-        <span *ngIf="!activeSessionPopupLoading">OK</span>
+        <span *ngIf="!activeSessionPopupLoading">
+          {{ 'OTP.OK' | translate }}
+        </span>
+
         <span *ngIf="activeSessionPopupLoading" class="spinner"></span>
       </button>
 
@@ -87,7 +104,7 @@
         [disabled]="activeSessionPopupLoading"
         (click)="closeActiveSessionPopup()"
       >
-        Cancel
+        {{ 'OTP.CANCEL' | translate }}
       </button>
 
     </div>
