@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { UserSessionService } from '../services/user-session.service';
 
-const API = 'http://192.168.29.69:8080/api';
+const API = 'http://192.168.29.68:8080/api';
 
 @Component({
   selector: 'app-change-password',
@@ -38,7 +38,9 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     const savedLanguage =
-      sessionStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
+      typeof localStorage === 'undefined'
+        ? null
+        : localStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
 
     this.translate.use(savedLanguage ?? 'en');
   }

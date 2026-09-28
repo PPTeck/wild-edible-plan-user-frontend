@@ -38,7 +38,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const savedLanguage =
-        sessionStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
+        typeof localStorage === 'undefined'
+          ? null
+          : localStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
 
       this.currentLanguage = savedLanguage ?? 'en';
 
@@ -51,10 +53,9 @@ export class MapComponent implements OnInit, AfterViewInit {
       this.currentLanguage === 'en' ? 'hi' : 'en';
 
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.setItem(
-        'selectedLanguage',
-        this.currentLanguage
-      );
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('selectedLanguage', this.currentLanguage);
+      }
     }
 
     this.translate.use(this.currentLanguage);

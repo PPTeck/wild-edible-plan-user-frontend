@@ -63,7 +63,9 @@ export class TerrainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const savedLanguage =
-      sessionStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
+      typeof localStorage === 'undefined'
+        ? null
+        : localStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
 
     this.translate.use(savedLanguage ?? 'en');
 

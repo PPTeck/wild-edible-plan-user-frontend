@@ -21,7 +21,7 @@ import {
   TranslateService
 } from '@ngx-translate/core';
 
-const API = 'http://192.168.29.69:8080/api';
+const API = 'http://192.168.29.68:8080/api';
 
 // Icon map for role names
 const ROLE_ICONS: Record<string, string> = {
@@ -58,6 +58,11 @@ export class WelcomeComponent implements OnInit {
   loading = false;
   errorMsg = '';
 
+  lockoutSeconds = 0;
+  private lockedEmail = '';
+  private lockedUserName = '';
+  private lockoutTimer?: ReturnType<typeof setInterval>;
+
   // Language
   selectedLanguage: 'en' | 'hi' = 'en';
 
@@ -73,7 +78,7 @@ export class WelcomeComponent implements OnInit {
     // Load saved language only in browser
     if (isPlatformBrowser(this.platformId)) {
       const savedLanguage =
-        sessionStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
+        localStorage.getItem('selectedLanguage') as 'en' | 'hi' | null;
 
       this.selectedLanguage = savedLanguage ?? 'en';
 
@@ -102,17 +107,37 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.stopLockoutTimer();
+  }
+
   // Language change
   changeLanguage(lang: 'en' | 'hi'): void {
     this.selectedLanguage = lang;
 
     // sessionStorage exists only in browser
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.setItem('selectedLanguage', lang);
+      localStorage.setItem('selectedLanguage', lang);
     }
 
     this.translate.use(lang);
     this.cdr.markForCheck();
+  }
+
+  roleLabel(roleName: string): string {
+    if (this.selectedLanguage !== 'hi') {
+      return roleName;
+    }
+
+    const translatedRoles: Record<string, string> = {
+      admin: 'व्यवस्थापक',
+      reviewer: 'समीक्षक',
+      manager: 'प्रबंधक',
+      'field operator': 'फील्ड ऑपरेटर',
+      'field staff': 'फील्ड स्टाफ',
+    };
+
+    return translatedRoles[roleName.trim().toLowerCase()] ?? roleName;
   }
 
   roleIcon(name: string): string {
@@ -129,56 +154,135 @@ export class WelcomeComponent implements OnInit {
     return !!this.selectedRole;
   }
 
-  login(): void {
-    if (!this.selectedRole || !this.emailId.trim() || !this.password) {
-      return;
-    }
+  get isAdmin(): boolean {
+    return this.selectedRole.trim().toLowerCase() === 'admin';
+  }
 
-    this.loading = true;
+  get isLocked(): boolean {
+    return this.lockoutSeconds > 0
+      && this.emailId.trim().toLowerCase() === this.lockedEmail
+      && !this.isAdmin;
+  }
+
+  // login(): void {
+  //   if (!this.selectedRole || !this.emailId.trim() || !this.password) {
+  //     return;
+  //   }
+
+  //   this.loading = true;
+  //   this.errorMsg = '';
+
+  //   this.http.post<any>(`${API}/auth/login`, {
+  //     emailId: this.emailId.trim(),
+  //     password: this.password,
+  //     roleName: this.selectedRole,
+  //   }).subscribe({
+
+  //     next: res => {
+  //       this.loading = false;
+  //       this.cdr.markForCheck();
+
+  //       if (isPlatformBrowser(this.platformId)) {
+  //         sessionStorage.setItem(
+  //           'pendingUserId',
+  //           String(res.userId)
+  //         );
+
+  //         sessionStorage.setItem(
+  //           'pendingUserName',
+  //           res.userName
+  //         );
+
+  //         sessionStorage.setItem(
+  //           'pendingRoleName',
+  //           this.selectedRole
+  //         );
+
+  //         sessionStorage.setItem(
+  //           'emailMasked',
+  //           res.emailMasked ?? ''
+  //         );
+
+  //         if (res.otp) {
+  //           sessionStorage.setItem('devOtp', res.otp);
+  //         }
+  //       }
+
+  //       this.router.navigate(['/verify-otp']);
+  //     },
+
+  //     error: err => {
+  //       this.errorMsg = err.error?.error ?? 'Login failed';
+  //       this.loading = false;
+  //       this.cdr.markForCheck();
+  //     },
+  //   });
+  // }
+
+  private startLockoutTimer(lockedUntil: string, fallbackMinutes: number): void {
+    const endTime = new Date(lockedUntil).getTime();
+    const fallbackEndTime = Date.now() + fallbackMinutes * 60 * 1000;
+    const targetTime = Number.isNaN(endTime) ? fallbackEndTime : endTime;
+
+    this.stopLockoutTimer();
+    const update = () => {
+      this.lockoutSeconds = Math.max(0, Math.ceil((targetTime - Date.now()) / 1000));
+      if (this.lockoutSeconds === 0) {
+        this.stopLockoutTimer();
+        this.errorMsg = '';
+        if (typeof window !== 'undefined') {
+          window.alert(`${this.lockedUserName} can login now. The 1-hour block has ended.`);
+        }
+      }
+      this.cdr.markForCheck();
+    };
+
+    update();
+    this.lockoutTimer = setInterval(update, 1000);
+  }
+
+  private stopLockoutTimer(): void {
+    if (this.lockoutTimer) {
+      clearInterval(this.lockoutTimer);
+      this.lockoutTimer = undefined;
+    }
+  }
+
+  login(): void {
+    if (!this.selectedRole || !this.emailId.trim() || !this.password || this.isLocked) return;
+
+    this.loading  = true;
     this.errorMsg = '';
 
     this.http.post<any>(`${API}/auth/login`, {
-      emailId: this.emailId.trim(),
+      emailId:  this.emailId.trim(),
       password: this.password,
       roleName: this.selectedRole,
     }).subscribe({
-
       next: res => {
         this.loading = false;
         this.cdr.markForCheck();
-
-        if (isPlatformBrowser(this.platformId)) {
-          sessionStorage.setItem(
-            'pendingUserId',
-            String(res.userId)
-          );
-
-          sessionStorage.setItem(
-            'pendingUserName',
-            res.userName
-          );
-
-          sessionStorage.setItem(
-            'pendingRoleName',
-            this.selectedRole
-          );
-
-          sessionStorage.setItem(
-            'emailMasked',
-            res.emailMasked ?? ''
-          );
-
-          if (res.otp) {
-            sessionStorage.setItem('devOtp', res.otp);
-          }
-        }
-
+        sessionStorage.setItem('pendingUserId',   String(res.userId));
+        sessionStorage.setItem('pendingUserName',  res.userName);
+        sessionStorage.setItem('pendingRoleName',  this.selectedRole);
+        sessionStorage.setItem('emailMasked',      res.emailMasked ?? '');
+        if (res.otp) sessionStorage.setItem('devOtp', res.otp);
         this.router.navigate(['/verify-otp']);
       },
-
       error: err => {
-        this.errorMsg = err.error?.error ?? 'Login failed';
-        this.loading = false;
+        if (err.status === 429 && err.error?.error === 'account_locked') {
+          const lockedUserName = err.error.userName ?? this.emailId.trim();
+          this.lockedEmail = this.emailId.trim().toLowerCase();
+          this.lockedUserName = lockedUserName;
+          this.errorMsg = 'This user is blocked for 1 hour. Please try again after 1 hour.';
+          if (typeof window !== 'undefined') {
+            window.alert(`${lockedUserName} is blocked for 1 hour after 3 failed attempts.`);
+          }
+          this.startLockoutTimer(err.error.lockedUntil, err.error.minutesLeft ?? 60);
+        } else {
+          this.errorMsg = err.error?.error ?? 'Login failed';
+        }
+        this.loading  = false;
         this.cdr.markForCheck();
       },
     });

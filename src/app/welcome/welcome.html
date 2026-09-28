@@ -52,7 +52,7 @@
           (change)="selectRole(r.roleName)"
         /> 
         <span class="radio-circle"></span> 
-        <span class="role-name-text">{{ r.roleName }}</span> 
+        <span class="role-name-text">{{ roleLabel(r.roleName) }}</span> 
       </label> 
     </div> 
  
@@ -71,7 +71,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#14532d"> 
           <path d="M12 12c2.7 0 4-1.8 4-4s-1.3-4-4-4-4 1.3-4 4 1.3 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z"/>
         </svg> 
-        {{ 'WELCOME.LOGGING_IN_AS' | translate }} <strong>{{ selectedRole }}</strong>
+        {{ 'WELCOME.LOGGING_IN_AS' | translate }} <strong>{{ roleLabel(selectedRole) }}</strong>
       </div> 
  
       <div class="alert-error" *ngIf="errorMsg">❌ {{ errorMsg }}</div> 
