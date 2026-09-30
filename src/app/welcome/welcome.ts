@@ -21,7 +21,7 @@ import {
   TranslateService
 } from '@ngx-translate/core';
 
-const API = 'http://192.168.29.68:8080/api';
+const API = 'http://192.168.29.70:8080/api';
 
 // Icon map for role names
 const ROLE_ICONS: Record<string, string> = {
@@ -125,19 +125,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   roleLabel(roleName: string): string {
-    if (this.selectedLanguage !== 'hi') {
-      return roleName;
-    }
-
-    const translatedRoles: Record<string, string> = {
-      admin: 'व्यवस्थापक',
-      reviewer: 'समीक्षक',
-      manager: 'प्रबंधक',
-      'field operator': 'फील्ड ऑपरेटर',
-      'field staff': 'फील्ड स्टाफ',
-    };
-
-    return translatedRoles[roleName.trim().toLowerCase()] ?? roleName;
+    return roleName;
   }
 
   roleIcon(name: string): string {
